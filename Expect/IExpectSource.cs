@@ -9,5 +9,6 @@ namespace Expect
         IObservable<Expectation> New { get; }
         IObservable<Expectation> Update { get; }  
         IObservable<ExpectationSource> Clear { get; } 
+        IObservable<Expectation> Complete { get; } 
     }
 }

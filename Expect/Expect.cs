@@ -34,4 +34,28 @@ namespace Expect
             return expectSource;
         }
     }
+
+    public static class ExpectSourceExtensions
+    {
+        public static Expectation Creates(this ExpectSource expectSource, long id, string name, long correlationId = 0, long typeId = 0, string[] tags = null, DateTime? sla = null, DateTime? eta = null, string payload = null, string remark = null)
+        {
+            var expectation = new Expectation
+            {
+                Id = id,
+                Name = name,
+                CorrelationId = correlationId,
+                TypeId = typeId,
+                Tags = tags,
+                CreatedUtc = DateTime.Now,
+                Sla = sla,
+                Eta = eta,
+                IsMet = false,
+                Payload = payload,
+                Remark = remark,
+                ExpectationSourceId = expectSource.ExpectationSource.Id
+            };
+            expectSource.Creates(expectation);
+            return expectation;
+        }
+    }
 }

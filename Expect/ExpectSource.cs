@@ -10,11 +10,13 @@ namespace Expect
         private Subject<Expectation> _new = new Subject<Expectation>();
         private Subject<Expectation> _update = new Subject<Expectation>();
         private Subject<ExpectationSource> _clear = new Subject<ExpectationSource>();
+        private Subject<Expectation> _complete = new Subject<Expectation>();
 
         public ExpectationSource ExpectationSource { get; }
         public IObservable<Expectation> New => _new;
         public IObservable<Expectation> Update => _update;
-        public IObservable<ExpectationSource> Clear => _clear; 
+        public IObservable<ExpectationSource> Clear => _clear;
+        public IObservable<Expectation> Complete => _complete; 
 
         public ExpectSource(ExpectationSource source)
         {
@@ -37,6 +39,12 @@ namespace Expect
         public void Clears()
         {
             _clear.OnNext(ExpectationSource);
+        }
+
+        public void Completes(params Expectation[] expectations)
+        {
+            foreach (var expect in expectations)
+                _complete.OnNext(expect);
         }
     }
 }

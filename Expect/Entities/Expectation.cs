@@ -17,6 +17,6 @@ namespace Expect.Entities
         public string Payload { get; set; }
         public string Remark { get; set; }
         public DateTime? MetUtc { get; set; }
-        public long ExpectSourceId { get; set; }
+        public long ExpectationSourceId { get; set; }
     }
 }
